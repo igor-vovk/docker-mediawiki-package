@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# main rewrite rule
+RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]
+
+# Redirect / to Main Page
+RewriteRule ^/*$ %{DOCUMENT_ROOT}/index.php [L]
