@@ -13,10 +13,10 @@ RUN set x; \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www
-RUN wget -nv https://releases.wikimedia.org/mediawiki/1.38/mediawiki-1.38.4.tar.gz \
-    && tar -xzf mediawiki-1.38.4.tar.gz \
-    && rm mediawiki-1.38.4.tar.gz \
-    && mv mediawiki-1.38.4 mediawiki
+RUN wget -nv https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.0.tar.gz \
+    && tar -xzf mediawiki-1.39.0.tar.gz \
+    && rm mediawiki-1.39.0.tar.gz \
+    && mv mediawiki-1.39.0 mediawiki
 
 COPY scripts/*.sh /
 COPY configs/mediawiki.conf /etc/apache2/sites-enabled/mediawiki.conf
