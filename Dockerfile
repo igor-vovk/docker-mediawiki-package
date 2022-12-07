@@ -13,8 +13,8 @@ RUN set x; \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www
-RUN wget https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.0.tar.gz \
-    && tar -xzvf mediawiki-1.39.0.tar.gz \
+RUN wget -nv https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.0.tar.gz \
+    && tar -xzf mediawiki-1.39.0.tar.gz \
     && rm mediawiki-1.39.0.tar.gz \
     && mv mediawiki-1.39.0 mediawiki
 
