@@ -25,6 +25,7 @@ COPY configs/robots.txt ${WWW_ROOT}/
 
 RUN set -x; \
     chmod -v +x /*.sh \
+    && mkdir /var/www/data && chown www-data:www-data /var/www/data \
     && a2enmod rewrite expires \
     && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
