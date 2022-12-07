@@ -30,7 +30,7 @@ RUN set -x; \
 
 EXPOSE 80
 
-HEALTHCHECK --interval=1m --timeout=10s \
-	CMD wget -q --method=HEAD localhost/w/api.php
+#HEALTHCHECK --interval=1m --timeout=10s \
+#	CMD wget -q --method=HEAD localhost/w/api.php
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
