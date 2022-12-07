@@ -7,7 +7,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set x; \
     apt update && apt install -y php8.1 php8.1-cli php8.1-intl php8.1-pdo php8.1-mysql \
-    php8.1-gd php8.1-mbstring php8.1-curl php8.1-zip php8.1-sqlite3 php8.1-xml \
+    php8.1-gd php8.1-mbstring php8.1-curl php8.1-zip php8.1-sqlite3 php8.1-xml less nano \
     apache2 apache2-utils wget software-properties-common gpg ca-certificates imagemagick \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -18,6 +18,7 @@ RUN wget -nv https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.0.tar.
     && rm mediawiki-1.39.0.tar.gz \
     && mv mediawiki-1.39.0 mediawiki
 
+COPY scripts/*.sh /
 COPY configs/mediawiki.conf /etc/apache2/sites-enabled/mediawiki.conf
 COPY configs/.htaccess ${WWW_ROOT}/
 COPY configs/robots.txt ${WWW_ROOT}/
