@@ -24,7 +24,8 @@ COPY configs/.htaccess ${WWW_ROOT}/
 COPY configs/robots.txt ${WWW_ROOT}/
 
 RUN set -x; \
-    a2enmod rewrite expires \
+    chmod -v +x /*.sh \
+    && a2enmod rewrite expires \
     && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
     && service apache2 restart
