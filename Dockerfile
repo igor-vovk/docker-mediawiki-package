@@ -7,8 +7,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set x; \
     apt update && apt install -y php8.1 php8.1-cli php8.1-intl php8.1-pdo php8.1-mysql \
-    php8.1-gd php8.1-mbstring php8.1-curl php8.1-zip php8.1-sqlite3 php8.1-xml less nano \
-    apache2 apache2-utils wget software-properties-common gpg ca-certificates imagemagick \
+    php8.1-gd php8.1-mbstring php8.1-curl php8.1-zip php8.1-sqlite3 php8.1-xml php8.1-apcu \
+    apache2 apache2-utils wget software-properties-common gpg ca-certificates imagemagick less nano \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
