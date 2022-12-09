@@ -8,6 +8,21 @@ Few problems that didn't allow me to use it:
 * SQLite support
 * this container uses latest version of MediaWiki at the moment, 1.39.0
 
+## Attaching extensions and skins
+This image supports attaching extensions and skins via volumes.
+To attach extensions and skins, symlink them to `/var/www/mediawiki/user-extensions` and `/var/www/mediawiki/user-skins` respectively:
+```yaml
+services:
+  wiki:
+    image: ghcr.io/igor-vovk/docker-mediawiki-package:main
+    restart: unless-stopped
+    volumes:
+      - ./user-extensions:/var/www/mediawiki/user-extensions
+      - ./user-skins:/var/www/mediawiki/user-skins
+
+...
+```
+
 ## Sitemap generation
 This image relies on external scheduler to trigger sitemap generation.
 The image provides `/mwsitemapgen.sh` script to trigger the generation.

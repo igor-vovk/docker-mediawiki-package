@@ -28,14 +28,17 @@ COPY configs/robots.txt ${WWW_ROOT}/
 RUN set -x; \
     chmod -v +x /*.sh \
     && mkdir /var/www/data && chown www-data:www-data /var/www/data \
+    && mkdir ${WWW_ROOT}/user-extensions && chown www-data:www-data ${WWW_ROOT}/user-extensions \
+    && mkdir ${WWW_ROOT}/user-skins && chown www-data:www-data ${WWW_ROOT}/user-skins \
     && a2enmod rewrite expires \
     && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
     && service apache2 restart
 
 EXPOSE 80
+WORKDIR ${WWW_ROOT}
 
 #HEALTHCHECK --interval=1m --timeout=10s \
 #	CMD wget -q --method=HEAD localhost/w/api.php
 
-CMD apache2ctl -D FOREGROUND
+CMD ["/mwrun.sh"]

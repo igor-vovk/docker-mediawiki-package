@@ -10,6 +10,13 @@
 # Further documentation for configuration settings may be found at:
 # https://www.mediawiki.org/wiki/Manual:Configuration_settings
 
+error_reporting( -1 );
+ini_set( 'display_startup_errors', 1 );
+ini_set( 'display_errors', 1 );
+// $wgDebugDumpSql = true;
+// $wgDebugLogFile = "/var/log/mediawiki/debug.log";
+
+
 # Protect against web entry
 if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
@@ -172,3 +179,4 @@ wfLoadSkin( 'Vector' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+wfLoadExtension('YouTube');
