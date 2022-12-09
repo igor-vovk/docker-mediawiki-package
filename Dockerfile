@@ -2,7 +2,8 @@ FROM ubuntu:22.04 as base
 LABEL org.opencontainers.image.authors="adwolf15@gmail.com"
 
 ENV TZ=Europe/Kyiv \
-    WWW_ROOT=/var/www/mediawiki
+    WWW_ROOT=/var/www/mediawiki \
+    MW_VERSION=1.39.0
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set x; \
@@ -14,10 +15,10 @@ RUN set x; \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www
-RUN wget -nv https://releases.wikimedia.org/mediawiki/1.39/mediawiki-1.39.0.tar.gz \
-    && tar -xzf mediawiki-1.39.0.tar.gz \
-    && rm mediawiki-1.39.0.tar.gz \
-    && mv mediawiki-1.39.0 mediawiki
+RUN wget -nv https://releases.wikimedia.org/mediawiki/1.39/mediawiki-${MW_VERSION}.tar.gz \
+    && tar -xzf mediawiki-${MW_VERSION}.tar.gz \
+    && rm mediawiki-${MW_VERSION}.tar.gz \
+    && mv mediawiki-${MW_VERSION} mediawiki
 
 COPY scripts/*.sh /
 COPY configs/mediawiki.conf /etc/apache2/sites-enabled/mediawiki.conf

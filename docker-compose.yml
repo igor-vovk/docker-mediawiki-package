@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mediawiki:
+    build: .
+    ports:
+      - 8080:80
+    volumes:
+      - ./test/LocalSettings.php:/var/www/mediawiki/LocalSettings.php
+      - database:/var/www/data
+      - images:/var/www/mediawiki/images
+volumes:
+  database:
+  images:
