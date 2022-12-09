@@ -3,7 +3,8 @@ LABEL org.opencontainers.image.authors="adwolf15@gmail.com"
 
 ENV TZ=Europe/Kyiv \
     WWW_ROOT=/var/www/mediawiki \
-    MW_VERSION=1.39.0
+    MW_VERSION=1.39.0 \
+    HASH=eb9e25b3b2163f48fe8f9b585d8004b4
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set x; \
