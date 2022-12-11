@@ -14,7 +14,7 @@ To attach extensions and skins, symlink them to `/var/www/mediawiki/user-extensi
 ```yaml
 services:
   wiki:
-    image: ghcr.io/igor-vovk/docker-mediawiki-package:main
+    image: ghcr.io/igor-vovk/tiny-mediawiki:main
     restart: unless-stopped
     volumes:
       - ./user-extensions:/var/www/mediawiki/user-extensions
@@ -41,7 +41,7 @@ services:
     depends_on:
       - wiki
   wiki:
-    image: ghcr.io/igor-vovk/docker-mediawiki-package:main
+    image: ghcr.io/igor-vovk/tiny-mediawiki:main
     restart: unless-stopped
     volumes:
       ...
