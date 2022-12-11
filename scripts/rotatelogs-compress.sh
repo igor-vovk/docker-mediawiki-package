@@ -1,4 +1,5 @@
 #!/bin/bash
+# This file is taken from Canasta project (https://github.com/canasta)
 file_to_compress="${2}"
 compress_exit_code=0
 

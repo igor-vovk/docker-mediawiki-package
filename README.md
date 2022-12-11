@@ -1,16 +1,49 @@
-# Tiny MediaWiki Docker Container
+# `igor-vovk/tiny-mediawiki`
+> Tiny [MediaWiki](https://www.mediawiki.org/) Docker Image
 
-https://www.mediawiki.org/
+Image: [`ghcr.io/igor-vovk/tiny-mediawiki`](https://ghcr.io/igor-vovk/tiny-mediawiki)
 
-This container is based on [Canasta](https://github.com/CanastaWiki/Canasta) package and takes some stuff from it.
-
-Few problems that didn't allow me to use it:
+Project aim is to support following features:
 * SQLite support
-* this container uses latest version of MediaWiki at the moment, 1.39.0
+* use latest version of MediaWiki engine (`1.39.0` at the moment)
+
+# Installation
+1. Create `database`, `images`, `user-skins`, `user-extensions` directories.
+2. Create `docker-compose.yml` file:
+```yaml
+version: '3'
+
+services:
+  wiki:
+    image: ghcr.io/igor-vovk/tiny-mediawiki:main
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - ./database:/var/www/data
+      - ./images:/var/www/mediawiki/images
+      - ./user-extensions:/var/www/mediawiki/user-extensions
+      - ./user-skins:/var/www/mediawiki/user-skins
+```
+3. Run `docker-compose up -d`
+4. Open [`http://localhost:8080/mw-config/index.php`](http://localhost:8080/mw-config/index.php) in your browser and follow installation instructions.
+5. Choose SQLite database and set `/var/www/data` as database directory. In the end of the installation, save the `LocalSettings.php` file and put it in the directory with your `docker-compose.yml` file.
+6. Add your `LocalSettings.php` file to the `docker-compose.yml` file:
+```yaml
+...
+    volumes:
+      - ./database:/var/www/data
+      - ./images:/var/www/mediawiki/images
+      - ./user-extensions:/var/www/mediawiki/user-extensions
+      - ./user-skins:/var/www/mediawiki/user-skins
+      - ./LocalSettings.php:/var/www/mediawiki/LocalSettings.php
+```
+7. Run `docker-compose up -d` again. You are good to go!
 
 ## Attaching extensions and skins
 This image supports attaching extensions and skins via volumes.
 To attach extensions and skins, symlink them to `/var/www/mediawiki/user-extensions` and `/var/www/mediawiki/user-skins` respectively:
+
 ```yaml
 services:
   wiki:
@@ -22,6 +55,9 @@ services:
 
 ...
 ```
+
+> Note: after making changes to extensions or skins, you need to run `docker-compose up -d` again, because they are linked during the startup.
+
 
 ## Sitemap generation
 This image relies on external scheduler to trigger sitemap generation.
