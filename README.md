@@ -41,8 +41,7 @@ services:
 7. Run `docker-compose up -d` again. You are good to go!
 
 ## Attaching extensions and skins
-This image supports attaching extensions and skins via volumes.
-To attach extensions and skins, symlink them to `/var/www/mediawiki/user-extensions` and `/var/www/mediawiki/user-skins` respectively:
+This image supports attaching extensions and skins via volumes. To attach extensions and skins, symlink them to `/var/www/mediawiki/user-extensions` and `/var/www/mediawiki/user-skins` respectively:
 
 ```yaml
 services:
@@ -89,4 +88,10 @@ services:
 
 volumes:
   sitemap:
+```
+
+## Error accessing SQLite database / uploading images
+Probably attached folders are not writable by the `www-data` user. To fix this, you need to change the owner of the folders:
+```bash
+sudo chown -R www-data:www-data ./database ./images
 ```
