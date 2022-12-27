@@ -1,14 +1,16 @@
-FROM ubuntu:22.04 as base
+FROM ubuntu:22.04
 LABEL org.opencontainers.image.authors="adwolf15@gmail.com"
 
-ENV TZ=Europe/Kyiv \
+ENV TZ=Europe/London \
+    DEBIAN_FRONTEND=noninteractive \
     WWW_ROOT=/var/www/mediawiki \
     MW_VERSION=1.39.1 \
     HASH=eb9e25b3b2163f48fe8f9b585d8004b4
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN set x; \
-    apt update && apt install -y php8.1 php8.1-cli php8.1-intl php8.1-pdo php8.1-mysql \
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone; \
+    \
+    apt update && apt install -y --no-install-recommends \
+    php8.1 php8.1-cli php8.1-intl php8.1-pdo php8.1-mysql \
     php8.1-gd php8.1-mbstring php8.1-curl php8.1-zip php8.1-sqlite3 php8.1-xml php8.1-apcu \
     apache2 apache2-utils wget ca-certificates imagemagick \
     && apt clean \
@@ -25,8 +27,7 @@ COPY configs/mediawiki.conf /etc/apache2/sites-enabled/mediawiki.conf
 COPY configs/.htaccess ${WWW_ROOT}/
 COPY configs/robots.txt ${WWW_ROOT}/
 
-RUN set -x; \
-    chmod -v +x /*.sh \
+RUN chmod -v +x /*.sh \
     && mkdir /var/www/data && chown www-data:www-data /var/www/data \
     && mkdir ${WWW_ROOT}/user-extensions && chown www-data:www-data ${WWW_ROOT}/user-extensions \
     && mkdir ${WWW_ROOT}/user-skins && chown www-data:www-data ${WWW_ROOT}/user-skins \
