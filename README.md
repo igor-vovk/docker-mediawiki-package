@@ -5,7 +5,7 @@ Image: [`ghcr.io/igor-vovk/tiny-mediawiki`](https://ghcr.io/igor-vovk/tiny-media
 
 Project aim is to support following features:
 * SQLite support
-* use latest version of MediaWiki engine (`1.39.0` at the moment)
+* use latest version of MediaWiki engine (`1.39.1` at the moment)
 
 # Installation
 1. Create `database`, `images`, `user-skins`, `user-extensions` directories.
