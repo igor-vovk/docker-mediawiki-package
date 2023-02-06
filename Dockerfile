@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:23.04
 LABEL org.opencontainers.image.authors="adwolf15@gmail.com"
 
 ENV TZ=Europe/London \
